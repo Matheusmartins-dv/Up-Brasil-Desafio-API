@@ -62,8 +62,8 @@ O projeto implementa funcionalidades CRUD (Create, Read, Update, Delete) básica
     ```bash
     dotnet ef database update --project SeuProjeto.Infra
     ```
-4.  **Rodar o Projeto:** Inicie a API:
+4.  **Rodar o Projeto:** Inicie a API Apartir da pasta Api:
     ```bash
-    dotnet run --project SeuProjeto.Api
+    dotnet run 
     ```
 5.  O projeto estará acessível (por padrão) em `https://localhost:5001` (ou a porta configurada).
