@@ -1,4 +1,4 @@
-# 🚀 Projeto Boilerplate: Clean Architecture, Vertical Slice & Multi-Tenant
+# 🚀 Projeto Cadastro de Produtos, Categorias e Usuários
 
 Este é um projeto **boilerplate** que demonstra a implementação de padrões de arquitetura modernos e robustos, focado em **Clean Architecture**, **Vertical Slice** e **Multi-Tenancy** em um ambiente **.NET**.
 
