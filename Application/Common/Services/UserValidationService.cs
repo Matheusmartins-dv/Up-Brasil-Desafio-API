@@ -9,16 +9,25 @@ public class UserValidationService(UpContext context) : IUserValidationService
 {
     public async Task ValidateUniqueness(string email, string document, CancellationToken cancellationToken)
     {
-        var userWithEmail = await context.User
-            .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+        await ValidateUniquenessDocument(document, cancellationToken);
+        await ValidateUniquenessEmail(email, cancellationToken);
+    }
 
-        if (userWithEmail is not null)
-            throw new AlreadyExistUserEmailException(); 
-            
+    public async Task ValidateUniquenessDocument(string document, CancellationToken cancellationToken)
+    {
         var userWithDocument = await context.User
             .FirstOrDefaultAsync(u => u.Document == document, cancellationToken);
 
         if (userWithDocument is not null)
             throw new AlreadyExistUserDocumentException();
+    }
+
+    public async Task ValidateUniquenessEmail(string email, CancellationToken cancellationToken)
+    {
+        var userWithEmail = await context.User
+            .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+
+        if (userWithEmail is not null)
+            throw new AlreadyExistUserEmailException();
     }
 }
