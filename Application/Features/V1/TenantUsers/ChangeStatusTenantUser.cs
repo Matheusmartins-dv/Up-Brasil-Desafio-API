@@ -32,10 +32,11 @@ public class ChangeStatusTenantUserEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPatch($"{RouteConstants.ApiV1}{RouteConstants.Tenant}{RouteConstants.User}", async (
-            [FromBody] ChangeStatusTenantUserCommand command,
+        app.MapPatch($"{RouteConstants.ApiV1}{RouteConstants.Tenant}{RouteConstants.User}/{{id}}/status", async (
+            [FromRoute] Guid id,
             ISender sender) =>
         {
+            var command = new ChangeStatusTenantUserCommand(id);
             var result = await sender.Send(command);
             
             return Results.Ok(new ApiResponse<bool>(result));

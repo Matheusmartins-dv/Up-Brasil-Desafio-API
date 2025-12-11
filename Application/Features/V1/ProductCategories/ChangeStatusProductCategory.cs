@@ -32,10 +32,11 @@ public class ChangeStatusProductCategoryEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPatch($"{RouteConstants.ApiV1}{RouteConstants.Product}{RouteConstants.Category}", async (
-            [FromBody] ChangeStatusProductCategoryCommand command,
+        app.MapPatch($"{RouteConstants.ApiV1}{RouteConstants.Product}{RouteConstants.Category}/{{id}}/status", async (
+            [FromRoute] Guid id,
             ISender sender) =>
         {
+            var command = new ChangeStatusProductCategoryCommand(id);
             var result = await sender.Send(command);
             
             return Results.Ok(new ApiResponse<bool>(result));
