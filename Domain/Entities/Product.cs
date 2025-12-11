@@ -66,6 +66,12 @@ public class Product : EntityBase
 
          return this;
       }
+      public Builder SetCategoryId(Guid categoryId)
+      {
+         _product.CategoryId = categoryId;
+
+         return this;
+      }
 
       public Product Build()
       {
