@@ -66,4 +66,4 @@ O projeto implementa funcionalidades CRUD (Create, Read, Update, Delete) básica
     ```bash
     dotnet run 
     ```
-5.  O projeto estará acessível (por padrão) em `https://localhost:5001` (ou a porta configurada).
+5.  O projeto estará acessível (por padrão) em `https://localhost:5171` (ou a porta configurada).
