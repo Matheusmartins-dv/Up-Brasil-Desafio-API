@@ -2,6 +2,7 @@ using Application.Common.Behaviors;
 using Application.Common.Constants;
 using Application.Exceptions;
 using Carter;
+using Domain.Interfaces;
 using Infra.Data.Context;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -22,21 +23,13 @@ public record UpdateProductCommand(
     decimal Price,
     bool Perishable) : IRequest<bool>;
 
-public class UpdateProductHandler(UpContext context) : IRequestHandler<UpdateProductCommand, bool>
+public class UpdateProductHandler(UpContext context, IProductValidationService productService) : IRequestHandler<UpdateProductCommand, bool>
 {
     public async Task<bool> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         var product = await context.Product.FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken) ?? throw new NotFoundException("Produto");
 
-        var categoryExist = await context.ProductCategory.FirstOrDefaultAsync(a => a.Id == request.ProductCategoryId, cancellationToken) ?? throw new NotFoundException("Categoria de produto");
-
-        if(!categoryExist.Active)
-            throw new ProductCategoryDeactivedException();
-        
-        var productWithSameSKU = await context.Product.FirstOrDefaultAsync(a => a.SKU == request.SKU && a.TenantId == request.TenantId, cancellationToken);
-        
-        if(productWithSameSKU != null)
-            throw new DuplicateProductSKUException(request.SKU);
+        await productService.ValidateRegisterAndUpdate(request.TenantId, request.ProductCategoryId, request.SKU, cancellationToken);
         
         product.UpdateName(request.Name);
         product.UpdateDescription(request.Description);

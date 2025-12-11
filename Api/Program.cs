@@ -17,6 +17,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDataBase(connectionString);
 
 builder.Services.AddScoped<IUserValidationService, UserValidationService>();
+builder.Services.AddScoped<IProductValidationService, ProductValidationService>();
 
 builder.Services.AddMediatR(cfg => 
     cfg.RegisterServicesFromAssembly(typeof(CreateUserCommand).Assembly));
