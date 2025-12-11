@@ -11,3 +11,4 @@ public class DomainException : ArgumentException
 
 public class FieldRequiredException(string field) : DomainException($"O campo {field} é obrigatório(a)"){}
 public class InvalidDocumentException() : DomainException(MessageExceptionDomainConstants.DocumentInvalid) { }
+public class ProductValueNotBeNegativeException() : DomainException(MessageExceptionDomainConstants.ProductValueNotBeNegative) { }

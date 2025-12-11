@@ -19,6 +19,7 @@ public class User : EntityBase
         if(!Document.IsValidDocument())
             throw new InvalidDocumentException();
    }
+   
    public class Builder
    {
       private readonly User _user = new();
