@@ -1,6 +1,6 @@
 using Application.Common.Behaviors;
+using Application.Common.Constants;
 using Carter;
-using Domain.Entities;
 using Domain.Interfaces;
 using Infra.Data.Context;
 using MediatR;
@@ -45,7 +45,7 @@ public class UpdateUserEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPut("api/users", async (
+        app.MapPut($"{RouteConstants.ApiV1}{RouteConstants.User}", async (
             [FromBody] UpdateUserCommand command,
             ISender sender) =>
         {

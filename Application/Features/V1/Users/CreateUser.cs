@@ -1,4 +1,5 @@
 using Application.Common.Behaviors;
+using Application.Common.Constants;
 using Carter;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -53,7 +54,7 @@ public class CreateUserEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("api/users", async (
+        app.MapPost($"{RouteConstants.ApiV1}{RouteConstants.User}", async (
             [FromBody] CreateUserCommand command,
             ISender sender) =>
         {
