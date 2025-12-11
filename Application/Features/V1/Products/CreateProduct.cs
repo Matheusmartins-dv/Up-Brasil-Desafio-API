@@ -25,8 +25,6 @@ public class CreateProductHandler(UpContext context, IProductValidationService p
 {
     public async Task<bool> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        await productService.ValidateRegisterAndUpdate(request.TenantId, request.ProductCategoryId, request.SKU, cancellationToken);
-
         var product = new Product.Builder()
             .SetSKU(request.SKU)
             .SetPerishable(request.Perishable)
@@ -36,6 +34,8 @@ public class CreateProductHandler(UpContext context, IProductValidationService p
             .SetCategoryId(request.ProductCategoryId)
             .SetPrice(request.Price)
             .Build();
+        
+        await productService.ValidateRegisterAndUpdate(product, request.ProductCategoryId, request.SKU, cancellationToken);
 
         context.Product.Add(product);
 

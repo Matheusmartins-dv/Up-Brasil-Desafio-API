@@ -29,7 +29,7 @@ public class UpdateProductHandler(UpContext context, IProductValidationService p
     {
         var product = await context.Product.FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken) ?? throw new NotFoundException("Produto");
 
-        await productService.ValidateRegisterAndUpdate(request.TenantId, request.ProductCategoryId, request.SKU, cancellationToken);
+        await productService.ValidateRegisterAndUpdate(product, request.ProductCategoryId, request.SKU, cancellationToken);
         
         product.UpdateName(request.Name);
         product.UpdateDescription(request.Description);

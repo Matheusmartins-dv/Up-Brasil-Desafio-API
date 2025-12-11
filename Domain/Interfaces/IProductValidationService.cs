@@ -1,6 +1,8 @@
+using Domain.Entities;
+
 namespace Domain.Interfaces;
 
 public interface IProductValidationService
 {
-   Task ValidateRegisterAndUpdate(Guid tenantId, Guid categoryId, string sku, CancellationToken cancellationToken);
+   Task ValidateRegisterAndUpdate(Product product, Guid categoryId, string sku, CancellationToken cancellationToken);
 }
