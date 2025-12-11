@@ -23,6 +23,5 @@
         <Folder Include="Features\V1\ProductCategories\" />
         <Folder Include="Features\V1\Products\" />
         <Folder Include="Features\V1\Tenants\" />
-        <Folder Include="Features\V1\TenantUsers\" />
     </ItemGroup>
 </Project>
