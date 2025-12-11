@@ -1,3 +1,5 @@
+using Domain.Constants;
+using Domain.Exceptions;
 using Domain.Extensions;
 
 namespace Domain.Entities;
@@ -12,10 +14,10 @@ public class User : EntityBase
    private void ValidateDocument()
    {
         if(string.IsNullOrWhiteSpace(Document))
-            throw new ArgumentException("Document is required");
-            
-        if(Document.IsValidDocument() is false)
-            throw new ArgumentException("Invalid document");
+            throw new FieldRequiredException("Documento");
+
+        if(!Document.IsValidDocument())
+            throw new InvalidDocumentException();
    }
    public class Builder
    {
@@ -27,9 +29,13 @@ public class User : EntityBase
          return this;
       }
 
-      public Builder SetPassword(string password)
+      public Builder SetPassword(string? password)
       {
+         if(password is null)
+            password = DefaultValuesDomainConstants.DefaultPassword;
+
          _user.Password = password;
+         
          return this;
       }
       public Builder SetName(string name)
