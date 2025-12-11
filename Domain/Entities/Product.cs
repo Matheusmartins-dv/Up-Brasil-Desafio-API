@@ -26,7 +26,42 @@ public class Product : EntityBase
         if(string.IsNullOrWhiteSpace(SKU))
             throw new FieldRequiredException("SKU");
    }
+   public void UpdateName(string name)
+   {
+      Name = name?.Trim() ?? string.Empty;
 
+      Validate();
+   }
+   public void UpdateDescription(string description)
+   {
+      Description = description;
+
+      Validate();
+   }
+   public void UpdateSKU(string sku)
+   {
+      SKU = sku?.ToUpper() ?? string.Empty;
+
+      Validate();
+   }
+   public void UpdatePrice(decimal price)
+   {
+      Price = price;
+
+      Validate();
+   }
+   public void UpdatePerishable(bool perishable)
+   {
+      Perishable = perishable;
+
+      Validate();
+   }
+   public void UpdateCategory(Guid categoryId)
+   {
+      CategoryId = categoryId;
+
+      Validate();
+   }
    public class Builder
    {
       private readonly Product _product = new();

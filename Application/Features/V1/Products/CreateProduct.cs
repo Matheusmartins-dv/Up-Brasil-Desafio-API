@@ -19,6 +19,7 @@ public record CreateProductCommand(
     string SKU,
     string Name,
     string Description,
+    decimal Price,
     bool Perishable) : IRequest<bool>;
 
 public class CreateProductHandler(UpContext context) : IRequestHandler<CreateProductCommand, bool>
@@ -36,6 +37,7 @@ public class CreateProductHandler(UpContext context) : IRequestHandler<CreatePro
             .SetDescription(request.Description)
             .SetTenantId(request.TenantId)
             .SetCategoryId(request.ProductCategoryId)
+            .SetPrice(request.Price)
             .Build();
         
         context.Product.Add(product);

@@ -18,7 +18,7 @@ public class ChangeStatusTenantUserHandler(UpContext context) : IRequestHandler<
 {
     public async Task<bool> Handle(ChangeStatusTenantUserCommand request, CancellationToken cancellationToken)
     {
-        var tenantUser = await context.TenantUser.FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken) ?? throw new NotFoundException("Usuário");
+        var tenantUser = await context.TenantUser.FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken) ?? throw new NotFoundException("Usuário Associado");
 
         tenantUser.ChangeStatus();
         
@@ -28,7 +28,7 @@ public class ChangeStatusTenantUserHandler(UpContext context) : IRequestHandler<
     }
 }
 
-public class UpdateUserEndpoint : ICarterModule
+public class ChangeStatusTenantUserEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {

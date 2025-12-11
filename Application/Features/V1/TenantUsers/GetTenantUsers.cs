@@ -40,13 +40,13 @@ public class GetTenantsHandler(UpContext context) : IRequestHandler<GetTenantUse
                 t.Tenant!.Description ?? string.Empty,
                 t.Active,
                 t.CreatedAt))
-            .ToListAsync(cancellationToken) ?? throw new NotFoundException("Tenant Users");
+            .ToListAsync(cancellationToken) ?? throw new NotFoundException("Usuários associados");
 
         return tenantUsers;
     }
 }
 
-public class GetTenantsEndpoint : ICarterModule
+public class GetTenantUsersEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
