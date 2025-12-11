@@ -1,5 +1,6 @@
 using Application.Common.Behaviors;
 using Application.Common.Constants;
+using Application.Exceptions;
 using Carter;
 using Domain.Entities;
 using Infra.Data.Context;
@@ -20,9 +21,9 @@ public class AssociateUserToTenantHandler(UpContext context) : IRequestHandler<A
 {
     public async Task<bool> Handle(AssociateUserToTenantCommand request, CancellationToken cancellationToken)
     {
-        var user = await context.User.FirstOrDefaultAsync(f => f.Id == request.UserId, cancellationToken) ?? throw new Exception("Usuário não encontrado.");
+        var user = await context.User.FirstOrDefaultAsync(f => f.Id == request.UserId, cancellationToken) ?? throw new NotFoundException("Usuário");
 
-        var tenant = await context.Tenant.FirstOrDefaultAsync(f => f.Id == request.TenantId, cancellationToken) ?? throw new Exception("Tenant não encontrado.");
+        var tenant = await context.Tenant.FirstOrDefaultAsync(f => f.Id == request.TenantId, cancellationToken) ?? throw new NotFoundException("Tenant");
 
         var tenatUser = new TenantUser.Builder()
             .SetTenant(tenant)

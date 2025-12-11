@@ -1,5 +1,6 @@
 using Application.Common.Behaviors;
 using Application.Common.Constants;
+using Application.Exceptions;
 using Carter;
 using Domain.Interfaces;
 using Infra.Data.Context;
@@ -23,7 +24,7 @@ public class UpdateUserHandler(UpContext context, IUserValidationService userSer
 {
     public async Task<bool> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = await context.User.FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken) ?? throw new Exception("Usuário não encontrado.");
+        var user = await context.User.FirstOrDefaultAsync(f => f.Id == request.Id, cancellationToken) ?? throw new NotFoundException("Usuário");
 
         if (user.Email != request.Email)
              await userService.ValidateUniquenessEmail(request.Email, cancellationToken);
@@ -35,7 +36,7 @@ public class UpdateUserHandler(UpContext context, IUserValidationService userSer
         user.UpdateEmail(request.Email);
         user.UpdateDocument(request.Document);
         
-        context.Update(user);
+        context.User.Update(user);
 
         return await context.SaveChangesAsync(cancellationToken) > 0;
     }
