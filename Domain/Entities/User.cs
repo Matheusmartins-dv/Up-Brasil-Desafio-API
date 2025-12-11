@@ -19,7 +19,7 @@ public class User : EntityBase
         if(!Document.IsValidDocument())
             throw new InvalidDocumentException();
    }
-   
+
    public class Builder
    {
       private readonly User _user = new();
@@ -32,10 +32,7 @@ public class User : EntityBase
 
       public Builder SetPassword(string? password)
       {
-         if(password is null)
-            password = DefaultValuesDomainConstants.DefaultPassword;
-
-         _user.Password = password;
+         _user.Password = password ?? DefaultValuesDomainConstants.DefaultPassword;
          
          return this;
       }
