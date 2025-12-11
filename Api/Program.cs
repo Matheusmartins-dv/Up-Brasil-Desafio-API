@@ -1,13 +1,29 @@
+using Application.Features.V1.Users;
 using Carter;
+using Infra.Data.Context;
+using Infra.Data;
+using Domain.Interfaces;
+using Application.Common.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddCarter();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
+    ?? throw new InvalidOperationException("DefaultConnection not found.");
+
+builder.Services.AddDataBase(connectionString);
+
+builder.Services.AddScoped<IUserValidationService, UserValidationService>();
+
+builder.Services.AddMediatR(cfg => 
+    cfg.RegisterServicesFromAssembly(typeof(CreateUserCommand).Assembly));
+
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<UpContext>();
 
 if (app.Environment.IsDevelopment())
 {

@@ -9,16 +9,19 @@ public class TenantUser : EntityBase
    public class Builder
    {
       private readonly TenantUser _tenantUser = new();
-      public Builder SetUser(Guid useId)
+      public Builder SetTenant(Tenant tenant)
       {
-         _tenantUser.UserId = useId;
+         _tenantUser.TenantId = tenant.Id; 
+         _tenantUser.Tenant = tenant;    
 
          return this;
       }
-     public Builder SetTenant(Guid tenantId)
+      
+      public Builder SetUser(User user)
       {
-         _tenantUser.TenantId = tenantId;
-         
+         _tenantUser.UserId = user.Id;
+         _tenantUser.User = user;
+
          return this;
       }
 
