@@ -1,0 +1,50 @@
+{
+  "sqltools.connections": [
+    {
+      "connectionTimeout": 15,
+      "mssqlOptions": {
+        "appName": "SQLTools",
+        "useUTC": true,
+        "encrypt": true,
+        "trustServerCertificate": false
+      },
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 1433,
+      "driver": "MSSQL",
+      "database": "PaypetDB",
+      "username": "sa",
+      "name": "Paypet local data"
+    },
+    {
+      "connectionTimeout": 15,
+      "mssqlOptions": {
+        "appName": "SQLTools",
+        "useUTC": true,
+        "encrypt": false,
+        "trustServerCertificate": true
+      },
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "127.0.0.1",
+      "port": 1433,
+      "driver": "MSSQL",
+      "name": "PaypetDB local",
+      "database": "PaypetDB",
+      "username": "sa",
+      "password": "YourStrong!Passw0rd"
+    },
+    {
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "Up-Brasil",
+      "database": "updb",
+      "username": "upbrasil",
+      "password": "postgres123"
+    }
+  ]
+}

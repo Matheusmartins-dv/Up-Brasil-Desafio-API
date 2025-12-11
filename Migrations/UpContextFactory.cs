@@ -10,7 +10,7 @@ public class UpContextFactory : IDesignTimeDbContextFactory<UpContext>
     {
         var optionsBuilder = new DbContextOptionsBuilder<UpContext>();
 
-        var connectionString = "Host=localhost;Port=5432;Database=updb;Username=updb;Password=postgres123";
+        var connectionString = "Host=localhost;Port=5432;Database=updb;Username=upbrasil;Password=postgres123";
 
         optionsBuilder.UseNpgsql(connectionString,
             b => b.MigrationsAssembly("Migrations"));
