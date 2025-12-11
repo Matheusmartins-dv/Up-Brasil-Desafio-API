@@ -2,6 +2,21 @@ namespace Domain.Extensions;
 
 public static class StringExtensions
 {
+    public static bool IsValidEmail(this string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            return false;
+
+        try
+        {
+            var mail = new System.Net.Mail.MailAddress(email);
+            return mail.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
+    }
     public static bool IsValidDocument(this string? document)
     {
         if (string.IsNullOrWhiteSpace(document))

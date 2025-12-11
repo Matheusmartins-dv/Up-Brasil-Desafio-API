@@ -19,6 +19,14 @@ public class User : EntityBase
         if(!Document.IsValidDocument())
             throw new InvalidDocumentException();
    }
+   private void ValidateEmail()
+   {
+         if(string.IsNullOrWhiteSpace(Email))
+               throw new FieldRequiredException("Email");
+   
+         if(!Email.IsValidEmail())
+               throw new EmailIsNotValidException();
+   }
    private void ValidateName()
    {
         if(string.IsNullOrWhiteSpace(Document))
@@ -28,11 +36,6 @@ public class User : EntityBase
    {
         if(string.IsNullOrWhiteSpace(Password))
             throw new FieldRequiredException("Senha");
-   }
-   private void ValidateEmail()
-   {
-        if(string.IsNullOrWhiteSpace(Email))
-            throw new FieldRequiredException("Email");
    }
    private void ValidateAll(){
       ValidateDocument();
