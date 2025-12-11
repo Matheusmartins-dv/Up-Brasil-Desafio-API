@@ -17,6 +17,19 @@ public class ProductCategory : EntityBase
             throw new FieldRequiredException("Nome da categoria");
    }
 
+   public void UpdateDescription(string description)
+   {
+      Description = description;
+
+      Validate();
+   }
+   public void UpdateName(string newName)
+   {
+      Name = newName;
+
+      Validate();
+   } 
+
    public class Builder
    {
       private readonly ProductCategory _productCategory = new();
@@ -29,6 +42,12 @@ public class ProductCategory : EntityBase
       public Builder SetName(string name)
       {
          _productCategory.Name = name;
+
+         return this;
+      }
+      public Builder SetTenantId(Guid tenantId)
+      {
+         _productCategory.TenantId = tenantId;
 
          return this;
       }

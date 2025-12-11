@@ -1,0 +1,38 @@
+# Arquivos de Solução e Projeto
+######################################################
+
+# Diretórios de build/binários
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# Resultado de build do .NET/NuGet
+*.suo
+*.user
+*.pdb
+*.pidb
+*.vsp
+*.sdf
+*.log
+*.vspscc
+*.vssscc
+*.bak
+*.ncb
+*.sbr
+*.res
+*.cache
+*.dll
+
+# Pacotes NuGet
+**/packages/
+.nuget/
+nuget.exe
+nuget.config
+
+# Ferramentas e IDEs
+######################################################
+
+# Visual Studio / VS Code
+.vs/
+.vscode/

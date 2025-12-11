@@ -50,7 +50,7 @@ public class GetTenantsEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet($"{RouteConstants.ApiV1}{RouteConstants.Tenant}{RouteConstants.User}/{{id}}", async (ISender sender, [FromRoute] Guid id) =>
+        app.MapGet($"{RouteConstants.ApiV1}{RouteConstants.Tenant}/{{id}}{RouteConstants.User}", async (ISender sender, [FromRoute] Guid id) =>
         {
             var query = new GetTenantUserQuery(id);
             var result = await sender.Send(query);

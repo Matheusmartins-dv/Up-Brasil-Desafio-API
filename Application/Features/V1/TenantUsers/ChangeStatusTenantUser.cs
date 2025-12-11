@@ -2,7 +2,6 @@ using Application.Common.Behaviors;
 using Application.Common.Constants;
 using Application.Exceptions;
 using Carter;
-using Domain.Interfaces;
 using Infra.Data.Context;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -13,8 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.V1.TenantUsers;
 
-public record ChangeStatusTenantUserCommand(
-    Guid Id) : IRequest<bool>;
+public record ChangeStatusTenantUserCommand(Guid Id) : IRequest<bool>;
 
 public class ChangeStatusTenantUserHandler(UpContext context) : IRequestHandler<ChangeStatusTenantUserCommand, bool>
 {
