@@ -3,6 +3,7 @@ using Application.Common.Constants;
 using Application.Exceptions;
 using Carter;
 using Domain.Entities;
+using Domain.Interfaces;
 using Infra.Data.Context;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -14,14 +15,25 @@ using Microsoft.EntityFrameworkCore;
 namespace Application.Features.V1.TenantUsers;
 
 public record AssociateUserToTenantCommand(
-    Guid UserId,
+    string FirstName,
+    string LastName,
+    string Document,
+    string Email,
+    string Password,
     Guid TenantId) : IRequest<bool>;
 
-public class AssociateUserToTenantHandler(UpContext context) : IRequestHandler<AssociateUserToTenantCommand, bool>
+public class AssociateUserToTenantHandler(UpContext context, IUserValidationService userService) : IRequestHandler<AssociateUserToTenantCommand, bool>
 {
     public async Task<bool> Handle(AssociateUserToTenantCommand request, CancellationToken cancellationToken)
     {
-        var user = await context.User.FirstOrDefaultAsync(f => f.Id == request.UserId, cancellationToken) ?? throw new NotFoundException("Usuário");
+        await userService.ValidateUniqueness(request.Email, request.Document, cancellationToken);
+
+        var user = new User.Builder()
+            .SetName($"{request.FirstName} {request.LastName}")
+            .SetEmail(request.Email)
+            .SetPassword(request.Password)
+            .SetDocument(request.Document)
+            .Build();
 
         var tenant = await context.Tenant.FirstOrDefaultAsync(f => f.Id == request.TenantId, cancellationToken) ?? throw new NotFoundException("Tenant");
 
