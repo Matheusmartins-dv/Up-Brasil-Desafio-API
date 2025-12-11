@@ -33,6 +33,11 @@ public class CreateProductHandler(UpContext context) : IRequestHandler<CreatePro
         if(!categoryExist.Active)
             throw new ProductCategoryDeactivedException();   
 
+        var productWithSameSKU = await context.Product.FirstOrDefaultAsync(a => a.SKU == request.SKU && a.TenantId == request.TenantId, cancellationToken);
+        
+        if(productWithSameSKU != null)
+            throw new DuplicateProductSKUException(request.SKU);
+
         var product = new Product.Builder()
             .SetSKU(request.SKU)
             .SetPerishable(request.Perishable)
