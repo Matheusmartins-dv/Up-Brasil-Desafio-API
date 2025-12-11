@@ -26,11 +26,11 @@ public class UpdateProductHandler(UpContext context) : IRequestHandler<UpdatePro
     public async Task<bool> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         var product = await context.Product.FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken) ?? throw new NotFoundException("Produto");
-        
+
         var categoryExist = await context.ProductCategory.FirstOrDefaultAsync(a => a.Id == request.ProductCategoryId, cancellationToken) ?? throw new NotFoundException("Categoria de produto");
 
         if(!categoryExist.Active)
-            throw new Exception("A categoria de produto está inativa.");
+            throw new ProductCategoryDeactivedException();
         
         product.UpdateName(request.Name);
         product.UpdateDescription(request.Description);

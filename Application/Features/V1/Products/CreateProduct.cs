@@ -30,6 +30,9 @@ public class CreateProductHandler(UpContext context) : IRequestHandler<CreatePro
 
         var categoryExist = await context.ProductCategory.FirstOrDefaultAsync(a => a.Id == request.ProductCategoryId, cancellationToken) ?? throw new NotFoundException("Categoria de produto");
 
+        if(!categoryExist.Active)
+            throw new ProductCategoryDeactivedException();   
+
         var product = new Product.Builder()
             .SetSKU(request.SKU)
             .SetPerishable(request.Perishable)

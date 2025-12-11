@@ -11,3 +11,4 @@ public class ApplicationExceptions : ArgumentException
 public class NotFoundException(string entity) : ApplicationExceptions($"{entity} não encontrado"){}
 public class AlreadyExistUserDocumentException() : ApplicationExceptions(MessageExceptionApplicationConstants.AlreadyExistUserDocument) { }
 public class AlreadyExistUserEmailException() : ApplicationExceptions(MessageExceptionApplicationConstants.AlreadyExistUserEmail) { }
+public class ProductCategoryDeactivedException() : ApplicationExceptions(MessageExceptionApplicationConstants.ProductCategoryDeactived) { }
