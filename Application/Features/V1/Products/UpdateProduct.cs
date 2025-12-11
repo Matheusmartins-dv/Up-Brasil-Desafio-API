@@ -14,6 +14,7 @@ namespace Application.Features.V1.Products;
 
 public record UpdateProductCommand(
     Guid Id,
+    Guid TenantId,
     Guid ProductCategoryId,
     string SKU,
     string Name,
@@ -31,6 +32,11 @@ public class UpdateProductHandler(UpContext context) : IRequestHandler<UpdatePro
 
         if(!categoryExist.Active)
             throw new ProductCategoryDeactivedException();
+        
+        var productWithSameSKU = await context.Product.FirstOrDefaultAsync(a => a.SKU == request.SKU && a.TenantId == request.TenantId, cancellationToken);
+        
+        if(productWithSameSKU != null)
+            throw new DuplicateProductSKUException(request.SKU);
         
         product.UpdateName(request.Name);
         product.UpdateDescription(request.Description);
