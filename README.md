@@ -1,4 +1,4 @@
-# 🚀 Projeto Boilerplate: Clean Architecture, Vertical Slice & Multi-Tenant
+# 🚀 Projeto Cadastro de Produtos, Categorias e Usuários
 
 Este é um projeto **boilerplate** que demonstra a implementação de padrões de arquitetura modernos e robustos, focado em **Clean Architecture**, **Vertical Slice** e **Multi-Tenancy** em um ambiente **.NET**.
 
@@ -62,8 +62,8 @@ O projeto implementa funcionalidades CRUD (Create, Read, Update, Delete) básica
     ```bash
     dotnet ef database update --project SeuProjeto.Infra
     ```
-4.  **Rodar o Projeto:** Inicie a API:
+4.  **Rodar o Projeto:** Inicie a API Apartir da pasta Api:
     ```bash
-    dotnet run --project SeuProjeto.Api
+    dotnet run 
     ```
-5.  O projeto estará acessível (por padrão) em `https://localhost:5001` (ou a porta configurada).
+5.  O projeto estará acessível (por padrão) em `https://localhost:5171` (ou a porta configurada).
