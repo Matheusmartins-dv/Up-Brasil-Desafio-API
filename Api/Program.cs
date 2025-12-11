@@ -4,6 +4,7 @@ using Infra.Data.Context;
 using Infra.Data;
 using Domain.Interfaces;
 using Application.Common.Services;
+using Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapCarter();
 

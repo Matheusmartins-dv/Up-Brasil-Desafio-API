@@ -1,3 +1,4 @@
+using Application.Common.Behaviors;
 using Carter;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -57,7 +58,8 @@ public class CreateUserEndpoint : ICarterModule
             ISender sender) =>
         {
             var result = await sender.Send(command);
-            return Results.Ok(result);
+            
+            return Results.Ok(new ApiResponse<bool>(result));
         })
         .WithName("CreateUser");
     }
