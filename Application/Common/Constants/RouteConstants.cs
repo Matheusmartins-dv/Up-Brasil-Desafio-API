@@ -7,4 +7,5 @@ public static class RouteConstants
     public const string User = "/users";
     public const string Product = "/products";
     public const string Category = "/categories";
+    public const string SignIn = "/signin";
 }
