@@ -15,7 +15,7 @@ namespace Application.Features.V1.Products;
 public record CreateProductCommand(
     Guid TenantId,
     Guid ProductCategoryId,
-    string SKU,
+    string Sku,
     string Name,
     string Description,
     decimal Price,
@@ -26,7 +26,7 @@ public class CreateProductHandler(UpContext context, IProductValidationService p
     public async Task<bool> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var product = new Product.Builder()
-            .SetSKU(request.SKU)
+            .SetSKU(request.Sku)
             .SetPerishable(request.Perishable)
             .SetName(request.Name)
             .SetDescription(request.Description)
@@ -35,7 +35,7 @@ public class CreateProductHandler(UpContext context, IProductValidationService p
             .SetPrice(request.Price)
             .Build();
         
-        await productService.ValidateRegisterAndUpdate(product, request.ProductCategoryId, request.SKU, cancellationToken);
+        await productService.ValidateRegisterAndUpdate(product, request.ProductCategoryId, request.Sku, cancellationToken);
 
         context.Product.Add(product);
 

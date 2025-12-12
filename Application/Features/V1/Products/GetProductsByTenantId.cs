@@ -19,7 +19,7 @@ public record ProductResponse(
     Guid CategoryId,
     string Name,
     string Description,
-    string SKU,
+    string Sku,
     decimal Price,
     bool Perishable);
 

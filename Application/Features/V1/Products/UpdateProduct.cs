@@ -17,7 +17,7 @@ public record UpdateProductCommand(
     Guid Id,
     Guid TenantId,
     Guid ProductCategoryId,
-    string SKU,
+    string Sku,
     string Name,
     string Description,
     decimal Price,
@@ -29,12 +29,12 @@ public class UpdateProductHandler(UpContext context, IProductValidationService p
     {
         var product = await context.Product.FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken) ?? throw new NotFoundException("Produto");
 
-        await productService.ValidateRegisterAndUpdate(product, request.ProductCategoryId, request.SKU, cancellationToken);
+        await productService.ValidateRegisterAndUpdate(product, request.ProductCategoryId, request.Sku, cancellationToken);
         
         product.UpdateName(request.Name);
         product.UpdateDescription(request.Description);
         product.UpdatePrice(request.Price);
-        product.UpdateSKU(request.SKU);
+        product.UpdateSKU(request.Sku);
         product.UpdatePerishable(request.Perishable);
         product.UpdateCategory(request.ProductCategoryId);
         
