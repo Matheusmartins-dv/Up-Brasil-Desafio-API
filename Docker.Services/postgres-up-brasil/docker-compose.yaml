@@ -1,0 +1,22 @@
+services:
+  up-brasil-postgres:
+    image: postgres:15
+    container_name: up-brasil-postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=upbrasil
+      - POSTGRES_PASSWORD=postgres123
+      - POSTGRES_DB=updb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - up-brasil-network
+
+volumes:
+  pgdata:
+
+networks:
+  up-brasil-network:
+    driver: bridge
