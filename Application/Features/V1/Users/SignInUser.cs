@@ -28,10 +28,15 @@ public class SignInUserHandler(UpContext context) : IRequestHandler<SignInUserCo
             .ThenInclude(t => t.Tenant)
             .FirstOrDefaultAsync(f => f.Email == request.Email && f.Password == request.Password, cancellationToken) 
             ?? throw new NotFoundException("Usuário");
+        
+        var tenantUsers = user.TenantUsers!.Where(w => w.Active).Select(s => s.TenantId).ToList();
+
+        if(!tenantUsers.Any())
+            throw new UnauthorizedAccessException("Usuário não está associado a nenhum tenant");
 
         return new SignInUserResponse(
             user.Id,
-            user.TenantUsers!.Select(s => s.TenantId).ToList()
+            tenantUsers
         );
         
     }
