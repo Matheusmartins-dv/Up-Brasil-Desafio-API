@@ -3,8 +3,8 @@ using Carter;
 using Infra.Data.Context;
 using Infra.Data;
 using Domain.Interfaces;
-using Application.Common.Services;
 using Api.Middlewares;
+using Application.Common.DomainCheckers;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -3,7 +3,7 @@ using Domain.Interfaces;
 using Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Common.Services;
+namespace Application.Common.DomainCheckers;
 
 public class UserValidationService(UpContext context) : IUserValidationService
 {
