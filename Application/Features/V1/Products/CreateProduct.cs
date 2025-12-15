@@ -17,7 +17,7 @@ public record CreateProductCommand(
     Guid ProductCategoryId,
     string Sku,
     string Name,
-    string Description,
+    string? Description,
     decimal Price,
     bool Perishable) : IRequest<bool>;
 

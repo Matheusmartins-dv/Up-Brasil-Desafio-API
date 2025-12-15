@@ -13,10 +13,7 @@ public class Product : EntityBase
    public Guid CategoryId { get; private set; }
    public ProductCategory? Category { get; private set; }
    private void Validate()
-   {
-        if(string.IsNullOrWhiteSpace(Description))
-            throw new FieldRequiredException("Descrição");
-        
+   {       
         if(string.IsNullOrWhiteSpace(Name))
             throw new FieldRequiredException("Nome da categoria");
          
@@ -32,7 +29,7 @@ public class Product : EntityBase
 
       Validate();
    }
-   public void UpdateDescription(string description)
+   public void UpdateDescription(string? description)
    {
       Description = description;
 
@@ -65,7 +62,7 @@ public class Product : EntityBase
    public class Builder
    {
       private readonly Product _product = new();
-      public Builder SetDescription(string description)
+      public Builder SetDescription(string? description)
       {
          _product.Description = description;
          
