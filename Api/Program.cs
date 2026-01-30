@@ -5,6 +5,7 @@ using Infra.Data;
 using Domain.Interfaces;
 using Api.Middlewares;
 using Application.Common.DomainCheckers;
+using Infra.Data.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,9 @@ builder.Services.AddDataBase(connectionString);
 
 builder.Services.AddScoped<IUserValidationService, UserValidationService>();
 builder.Services.AddScoped<IProductValidationService, ProductValidationService>();
+
+builder.Services.AddScoped<IHelperPagination, HelperPagination>();
+builder.Services.AddScoped<IHelperFilter, HelperFilter>();
 
 builder.Services.AddMediatR(cfg => 
     cfg.RegisterServicesFromAssembly(typeof(CreateUserCommand).Assembly));

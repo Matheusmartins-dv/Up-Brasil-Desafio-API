@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Builders\" />
+    <Folder Include="Common\" />
+    <Folder Include="Common\QueryObject\" />
+    <Folder Include="Enums\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
 

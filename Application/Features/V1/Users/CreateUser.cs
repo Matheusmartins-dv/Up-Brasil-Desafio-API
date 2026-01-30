@@ -1,6 +1,7 @@
 using Application.Common.Behaviors;
 using Application.Common.Constants;
 using Carter;
+using Domain.Builders;
 using Domain.Entities;
 using Domain.Interfaces;
 using Infra.Data.Context;
@@ -25,11 +26,11 @@ public class CreateUserHandler(UpContext context, IUserValidationService userSer
     {
         await userService.ValidateUniqueness(request.Email, request.Document, cancellationToken);
 
-        var user = new User.Builder()
+        var user = new UserBuilder()
             .SetName($"{request.FirstName} {request.LastName}")
+            .SetDocument(request.Document)
             .SetEmail(request.Email)
             .SetPassword(request.Password)
-            .SetDocument(request.Document)
             .Build();
 
         var tenant = new Tenant.Builder()

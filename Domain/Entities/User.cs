@@ -6,11 +6,11 @@ namespace Domain.Entities;
 
 public class User : EntityBase
 {
-   public string Email { get; private set; } = string.Empty;
-   public string Password { get; private set; } = string.Empty;
-   public string Name { get; private set; } = string.Empty;
-   public string Document { get; private set; } = string.Empty;
-   public ICollection<TenantUser>? TenantUsers { get; private set; }
+   public string Email { get; internal set; } = string.Empty;
+   public string Password { get; internal set; } = string.Empty;
+   public string Name { get; internal set; } = string.Empty;
+   public string Document { get; internal set; } = string.Empty;
+   public ICollection<TenantUser>? TenantUsers { get; internal set; }
    private void ValidateDocument()
    {
         if(string.IsNullOrWhiteSpace(Document))
@@ -37,7 +37,7 @@ public class User : EntityBase
         if(string.IsNullOrWhiteSpace(Password))
             throw new FieldRequiredException("Senha");
    }
-   private void ValidateAll(){
+   internal void ValidateAll(){
       ValidateDocument();
       ValidateName();
       ValidatePassword();
@@ -66,40 +66,5 @@ public class User : EntityBase
       Email = newEmail;
 
       ValidateEmail();
-   }
-
-   public class Builder
-   {
-      private readonly User _user = new();
-
-      public Builder SetEmail(string email)
-      {
-         _user.Email = email;
-         return this;
-      }
-
-      public Builder SetPassword(string? password)
-      {
-         _user.Password = password ?? DefaultValuesDomainConstants.DefaultPassword;
-         
-         return this;
-      }
-      public Builder SetName(string name)
-      {
-         _user.Name = name;
-         return this;
-      }
-      public Builder SetDocument(string document)
-      {
-         _user.Document = document;
-         return this;
-      }
-
-      public User Build()
-      {
-         _user.ValidateAll();
-
-         return _user;
-      }
    }
 }
